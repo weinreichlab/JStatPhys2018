@@ -159,7 +159,13 @@ for file = files'
         NullTaubFilename = ...
             sprintf('./NullTau_bDistrs/%dLoci%dSigWalsh.mat',loci,...
             sig_nonzero_Walsh);
-        % Then see if it already exists
+        % Then see if directory exists, and create it if necessary
+        if ~exist('./NullTau_bDistrs')
+            mkdir('./NullTau_bDistrs');
+        end
+
+        % Now see if this particular null distribution has already been
+        % simulated
         if exist(NullTaubFilename)
             % if so, use it
             load(NullTaubFilename)
