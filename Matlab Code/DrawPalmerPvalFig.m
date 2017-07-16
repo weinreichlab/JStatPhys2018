@@ -1,6 +1,8 @@
 
 % This code plots the observed values tau_b and p-value for the
-% Palmer dataset and the corresponding Tau_b c.d.f. 
+% Palmer dataset as analyzed by me, and the corresponding Tau_b c.d.f. 
+%
+% This is how I produced the plot in Fig 1c.
 %
 % DMW June 20, 2017
 %
@@ -11,20 +13,47 @@
 
 close all
 
-PALMER_TAU_B = 0.1980;
-PALMER_P = 0.03787;
-PALMER_SIG_COEFFICIENTS = 54;
+% These first two values comes from TauTable.csv, which is produced by
+% BuildKendallTauTable.m
+ObsTaub = 0.1921;
+SizePalmerRanks = 55;
+genotypes = 64;
 
-load('./NullTau_bDistr.mat');
-total_pseudo_replicates = size(taub_null_distr,1);
-PALMER_P = PALMER_P * total_pseudo_replicates;
+total_pseudo_replicates = 1e5; 
+
+% Now build the canonical unitation for this dataset
+canonical_unitations = [];
+loci = log2(genotypes);
+for i=0:loci
+    for j=1:nchoosek(loci,i)
+        canonical_unitations(end+1) = i;
+    end
+end
+canonical_unitations = canonical_unitations;
+
+
+% Now build the null distribution and get P
+NullDistr = zeros(total_pseudo_replicates,1);
+for i = 1:total_pseudo_replicates
+    test_sample = randsample(canonical_unitations, SizePalmerRanks);
+    test_sample2 = randsample(canonical_unitations, SizePalmerRanks);
+    NullDistr(i) = ktaub([test_sample' test_sample2'],0.05,0); 
+end
+NullDistr = sort(NullDistr);
+for i= 1:total_pseudo_replicates
+    if ObsTaub < NullDistr(i)
+        break
+    end
+end
+% not really: this is the integer index to plot with, rather than the (0,1)
+% probability itself.
+pval1 = total_pseudo_replicates - i;
 
 % plot([1:-1/total_pseudo_replicates:1/total_pseudo_replicates],...
-plot([total_pseudo_replicates:-1:1],...
-    taub_null_distr(:,PALMER_SIG_COEFFICIENTS),'--','LineWidth',2)
+plot([total_pseudo_replicates:-1:1],NullDistr,'--','LineWidth',2)
 hold on
-plot([PALMER_P,PALMER_P],[-.5,PALMER_TAU_B],'r','LineWidth',2)
-plot([0,PALMER_P],[PALMER_TAU_B,PALMER_TAU_B],'r','LineWidth',2)
+plot([pval1,pval1],[-.5,ObsTaub],'r','LineWidth',2)
+plot([0,pval1],[ObsTaub,ObsTaub],'r','LineWidth',2)
 set(gca, 'FontSize',24);
 %xticks([1:total_pseudo_replicates/5:total_pseudo_replicates]);
 yticks([-0.5:.25:.5]);
