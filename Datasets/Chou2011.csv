@@ -1,0 +1,20 @@
+# Chou et al 2011 https://doi.org/10.1126/science.1203799,,,,
+# fitness relative to wt; data from Figure 1. Emailed Chris Marx for measurement error data 6/13/17,,,,
+2,2,2,2,
+fghA,pntAB,gshA,GB,Log[Relative fitness among Methylobacterium extorquens mutants]
+0,0,0,0,0
+0,0,0,1,0.06669855
+0,0,1,0,0.17868924
+0,0,1,1,0.214578954
+0,1,0,0,0.039810554
+0,1,0,1,0.113609151
+0,1,1,0,0.20790353
+0,1,1,1,0.258158193
+1,0,0,0,0.057666104
+1,0,0,1,0.120573931
+1,0,1,0,0.21031852
+1,0,1,1,0.25139485
+1,1,0,0,0.10754913
+1,1,0,1,0.156851901
+1,1,1,0,0.243534102
+1,1,1,1,0.286680969
