@@ -35,7 +35,7 @@ colors = {'k','b','m','r','g','y','c'};
 num_colors = size(colors,2);
 
 % Do we want data from the simulated control or the biology?
-NK = 1;
+NK = 0;
 
 if NK
     files = dir('../NK landscapes/*.csv');
@@ -210,6 +210,11 @@ for file = files'
     else
         output_filename = sprintf( '../Figure 1 ln(data)/%s',file.name);
     end
+    
+    if ~exist('../Residual Variance Figs')
+        mkdir('../Residual Variance Figs');
+    end
+    
     % gcf is some kind of magic handle to the figure; I found it in the
     % saveas help page w/o much explanation.
     saveas (gcf,output_filename,'pdf');
