@@ -56,28 +56,7 @@ for i= 1:total_pseudo_replicates
         break
     end
 end
-pval1 = ((total_pseudo_replicates - i) / total_pseudo_replicates)
+pval1 = ((total_pseudo_replicates - i) / total_pseudo_replicates);
 
-pval1 = pval1*total_pseudo_replicates;
-plot([total_pseudo_replicates:-1:1],...
-    NullDistr(:),'--')
-hold on
-plot([pval1,pval1],[-.2,ObsTaub],'r')
-plot([0,pval1],[ObsTaub,ObsTaub],'r')
-set(gca, 'FontSize',24);
-%xticks([1:total_pseudo_replicates/5:total_pseudo_replicates]);
-yticks([-0.2:.1:.2]);
+sprintf('tau_b %f P-value %f',ObsTaub,pval1)
 
-% Create xlabel and ylabel
-X = xlabel({'Sorted Test Statistic Index'});
-Y = ylabel({'Sorted Test Statistic Value'});
-set(X, 'FontSize', 24, 'FontName','Helvetica');
-set(Y, 'FontSize', 24, 'FontName','Helvetica');
-%set(gca,'xscale','log')
-
-
-% gcf is some kind of magic handle to the figure; I found it in the
-% saveas help page w/o much explanation.
-saveas (gcf,'../PalmerFig2Fig','pdf');
-
-hold off
