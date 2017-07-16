@@ -1,0 +1,14 @@
+This directory contains all the code used to prepare this manuscript. Of these, 
+the following are to be run directly from inside MATLAB:
+
+- BuildKendallTauTable.m, which produces the content for Table 1
+- ComputePalmerFig2aTau_b.m, which analyzes the aggregated ranks given in Palmer figure 2a
+- DrawPalmerPvalFig.m produces Fig 1c
+- DrawResidualVarFigs.m produces Fig S1
+
+The remaining files are subroutines:
+
+- CountPeaks.m contributes to Table 1
+- GetResdidualVariance.m is the analytic pipeline itself
+- ktaub.m computes the statistic and came from https://www.mathworks.com/matlabcentral/fileexchange/11190-mann-kendall-tau-b-with-sen-s-method--enhanced-?focused=3795005&tab=function
+- ReadDataFile.m reads the CSVs for both BuildKendallTauTable.m and DrawResidualVarFigs.m
