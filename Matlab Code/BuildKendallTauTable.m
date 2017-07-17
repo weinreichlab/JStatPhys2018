@@ -12,7 +12,7 @@
 % ceil(log2(x)) loci. For example, if I have 6 rank orders to compare to
 % the canonical expectation, I assume that the canonicals are the first six
 % of those defined by ceil(log2(6)) = 3 bits, i.e., 0 1 1 1 2 2 (2 3),
-% where the (2 3) are those lopped off.
+% where the (2 3) are those lopped off. 
 %
 % But if the 6 significantly-residual-variance reducing Walsh coefficients
 % are sampled from those seen for, say 5 loci, then the first six
